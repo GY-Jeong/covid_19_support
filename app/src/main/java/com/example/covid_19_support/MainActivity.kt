@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initSpinner() {
+        //김병찬 git 수정 되는지 test
         val locationArray = arrayListOf("전국", "서울특별시", "경기도", "부산광역시", "인천광역시", "대구광역시", "대전광역시", "광주광역시",
             "울산광역시", "경상북도", "경상남도", "충청북도", "충청남도", "전라북도", "전라남도", "강원도", "제주특별자치도", "세종특별시")
         val option0 = arrayListOf("고용노동부" , "과학기술정보통신부", "교육부", "국세청","국토교통부","금융위원회","농림축산식품부" ,
