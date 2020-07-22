@@ -43,25 +43,24 @@
 
     <Spinner
         android:id="@+id/locationOptionSpinner"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
+        android:layout_marginStart="28dp"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/detailOptionSpinner"
         app:layout_constraintStart_toEndOf="@+id/textView4" />
 
     <Spinner
         android:id="@+id/detailOptionSpinner"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="87dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="56dp"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/locationOptionSpinner"
-        app:layout_constraintTop_toTopOf="@+id/locationOptionSpinner" />
+        app:layout_constraintStart_toStartOf="@+id/locationOptionSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/locationOptionSpinner" />
 
     <TextView
         android:id="@+id/textView4"
@@ -104,7 +103,6 @@
         android:layout_marginEnd="19dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/detailOptionSpinner" />
