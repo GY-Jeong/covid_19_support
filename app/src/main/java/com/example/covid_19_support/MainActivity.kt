@@ -1,48 +1,30 @@
 package com.example.covid_19_support
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    var initTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSpinner()
+        startJob()
     }
 
     private fun initSpinner() {
-        //김병찬 git 수정 되는지 test
-        //다시 수정확인하자
-        val locationArray = arrayListOf("전국", "서울특별시", "경기도", "부산광역시", "인천광역시", "대구광역시", "대전광역시", "광주광역시",
-            "울산광역시", "경상북도", "경상남도", "충청북도", "충청남도", "전라북도", "전라남도", "강원도", "제주특별자치도", "세종특별시")
-        val option0 = arrayListOf("고용노동부" , "과학기술정보통신부", "교육부", "국세청","국토교통부","금융위원회","농림축산식품부" ,
-            "보건복지부", "산림청", "산업통상자원부","중소벤처기업부","특허청","행정안전부", "국민연금공단", "도로교통공단", "예금보험공사","한국공항공사",
-            "한국관광공사","한국농수산식품유통공사" , "한국동서발전(주)", "한국문화정보원", "한국소방산업기술원","한국소비자원","한국장애인고용공단","한국학중앙연구원")
-        val seoul = arrayListOf("서울특별시" , "관악구", "노원구", "동대문구", "동작구", "서대문구","성동구","영등포구","은평구","종로구","서울교통공사")
-        val gyeonggi = arrayListOf("경기도" , "고양시", "과천시", "광주시", "구리시", "김포시","동두천시" , "부천시", "수원시", "시흥시", "안성시","안양시" , "양주시", "양평군", "여주시", "오산시", "용인시" , "의왕시", "의정부시", "이천시", "평택시", "포천시" , "하남시")
-        val busan = arrayListOf("강서구" , "남구", "동구", "동래구","부산진구","북구","사상구" , "사하구", "수영구", "연제구","영도구","해운대구","부산도시공사")
-        val incheon = arrayListOf("계양구" , "계양구","미추홀구", "부평구", "서구","연수구")
-        val daegu = arrayListOf("대구광역시" , "달성군", "서구", "수성구","대구광역시교육청","대구도시공사")
-        val daejeon = arrayListOf("대전광역시" , "대덕구", "동구", "서구","유성구","중구")
-        val gwangju = arrayListOf("광주광역시" , "광산구", "서구", "광주광역시도시철도공사")
-        val ulsan = arrayListOf("울산광역시", "남구", "동구", "북구", "울주군", "울산항만공사")
-        val gyeongnam = arrayListOf("경상남도" , "거제시", "밀양시", "산청군", "진주시", "창원시","통영시","경상남도교육청")
-        val gyeongbuk = arrayListOf("경상북도" , "경산시", "경주시", "구미시", "김천시", "봉화군","안동시","영천시","예천군","청도군","칠곡군")
-        val chungbuk = arrayListOf("충청북도" , "보은군", "영동군", "옥천군", "음성군", "제천시", "증평군", "진천군", "천안시", "충주시")
-        val chungnam = arrayListOf("충청남도" , "보령시", "부여군", "서천군", "예산군", "청양군","태안군")
-        val jeonbuk = arrayListOf("전라북도" , "군산시", "남원시", "무주군", "순창군", "임실군","장수군","정읍시","전주시시설관리공단")
-        val jeonnam = arrayListOf("강진군" , "광양시", "구례군", "담양군", "보성군", "순천시","여수시","함평군","해남군")
-        val gwangwon = arrayListOf("강원도" , "삼척시", "양구군", "양양군", "철원군", "홍천군")
-        val jeju = arrayListOf("제주특별자치도")
-        val sejong = arrayListOf("세종특별자치시")
+        val location = locationArray()
 
         val searchOptionAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, locationArray)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, location.locationList)
 
         locationOptionSpinner.adapter = searchOptionAdapter
         locationOptionSpinner.setSelection(0)
@@ -62,28 +44,50 @@ class MainActivity : AppCompatActivity() {
             ) {
                 detailSearchOptionAdapter.clear()
                 when(position) {
-                    0 -> detailSearchOptionAdapter.addAll(option0)
-                    1 -> detailSearchOptionAdapter.addAll(seoul)
-                    2 -> detailSearchOptionAdapter.addAll(gyeonggi)
-                    3 -> detailSearchOptionAdapter.addAll(busan)
-                    4 -> detailSearchOptionAdapter.addAll(incheon)
-                    5 -> detailSearchOptionAdapter.addAll(daegu)
-                    6 -> detailSearchOptionAdapter.addAll(daejeon)
-                    7 -> detailSearchOptionAdapter.addAll(gwangju)
-                    8 -> detailSearchOptionAdapter.addAll(ulsan)
-                    9 -> detailSearchOptionAdapter.addAll(gyeongnam)
-                    10 -> detailSearchOptionAdapter.addAll(gyeongbuk)
-                    11 -> detailSearchOptionAdapter.addAll(chungbuk)
-                    12 -> detailSearchOptionAdapter.addAll(chungnam)
-                    13 -> detailSearchOptionAdapter.addAll(jeonbuk)
-                    14 -> detailSearchOptionAdapter.addAll(jeonnam)
-                    15 -> detailSearchOptionAdapter.addAll(gwangwon)
-                    16 -> detailSearchOptionAdapter.addAll(jeju)
-                    17 -> detailSearchOptionAdapter.addAll(sejong)
-
+                    0 -> detailSearchOptionAdapter.addAll(location.option0)
+                    1 -> detailSearchOptionAdapter.addAll(location.seoul)
+                    2 -> detailSearchOptionAdapter.addAll(location.gyeonggi)
+                    3 -> detailSearchOptionAdapter.addAll(location.busan)
+                    4 -> detailSearchOptionAdapter.addAll(location.incheon)
+                    5 -> detailSearchOptionAdapter.addAll(location.daegu)
+                    6 -> detailSearchOptionAdapter.addAll(location.daejeon)
+                    7 -> detailSearchOptionAdapter.addAll(location.gwangju)
+                    8 -> detailSearchOptionAdapter.addAll(location.ulsan)
+                    9 -> detailSearchOptionAdapter.addAll(location.gyeongnam)
+                    10 -> detailSearchOptionAdapter.addAll(location.gyeongbuk)
+                    11 -> detailSearchOptionAdapter.addAll(location.chungbuk)
+                    12 -> detailSearchOptionAdapter.addAll(location.chungnam)
+                    13 -> detailSearchOptionAdapter.addAll(location.jeonbuk)
+                    14 -> detailSearchOptionAdapter.addAll(location.jeonnam)
+                    15 -> detailSearchOptionAdapter.addAll(location.gwangwon)
+                    16 -> detailSearchOptionAdapter.addAll(location.jeju)
+                    17 -> detailSearchOptionAdapter.addAll(location.sejong)
                 }
                 detailOptionSpinner.adapter = detailSearchOptionAdapter
             }
         }
+    }
+
+
+    private fun startJob() {
+        val i = Intent(this, ResultActivity::class.java)
+    }
+
+    /**
+     * 뒤로가기 키 1.5초 안에 두번 누르면 프로그램 종료
+     */
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_BACK -> {
+                if ((System.currentTimeMillis() - initTime) > 1500) {
+                    Toast.makeText(this, "종료하려면 한번 더 누르세요.", Toast.LENGTH_SHORT).show()
+                    initTime = System.currentTimeMillis()
+                } else {
+                    finish()
+                }
+                return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

@@ -89,7 +89,7 @@
         android:layout_width="203dp"
         android:layout_height="38dp"
         android:layout_marginStart="68dp"
-        android:layout_marginBottom="260dp"
+        android:layout_marginBottom="156dp"
         android:checked="true"
         android:text="신청기간이 지난 서비스 제외"
         app:layout_constraintBottom_toBottomOf="parent"
