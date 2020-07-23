@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,6 +18,9 @@ class ResultActivity : AppCompatActivity() {
 
         val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        val resultID = ArrayList<Int>()
+        val resultNAME = ArrayList<String>()
 
         val i = intent
         val isValid = i.getBooleanExtra("isValid", true)
@@ -39,6 +43,22 @@ class ResultActivity : AppCompatActivity() {
         }
 
         Log.i("isValid", isValid.toString())
+
+        /**
+         *파베에서 검색 후, 배열에 넣어준 후,
+         */
+        //아래는 임시
+        resultID.add(1)
+        resultID.add(2)
+        resultID.add(3)
+        resultNAME.add("국가지원1")
+        resultNAME.add("국가지원2")
+        resultNAME.add("국가지원3")
+        var adapter:ResultAdapter = ResultAdapter(resultID,resultNAME)
+        recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
+
+
     }
     fun searchFB(keyword:ArrayList<String> , location:ArrayList<String>):Int {
         // TODO: 2020-07-23 파베에서 읽는 코드를 넣어야함 인자랑 내용 수정 요망

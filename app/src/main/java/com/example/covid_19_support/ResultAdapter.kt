@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ResultAdapter(val resultList:ArrayList<Int>) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
-    //파베에서 꺼낸 ID로 리스트를 만들어 가져오면, 여기서 Int로 받아 처리합니다. 후에 파베에 다시 접근해야합니다.
+class ResultAdapter(val resultID:ArrayList<Int>, val resultNAME:ArrayList<String>) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
+
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val resultList = itemView.findViewById(R.id.resultList) as TextView
     }
@@ -18,12 +18,12 @@ class ResultAdapter(val resultList:ArrayList<Int>) : RecyclerView.Adapter<Result
     }
 
     override fun getItemCount(): Int {
-        return resultList.size
+        return resultID.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list:Int = resultList[position]
+        val list:String = resultNAME[position]
 
-        holder.resultList.text = list.toString() // 여기서 파베에 접근해서 제목을 가져오도록 수정해야됨
+        holder.resultList.text = list // 여기서 파베에 접근해서 제목을 가져오도록 수정해야됨
     }
 }
