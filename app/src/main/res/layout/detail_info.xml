@@ -6,6 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/fab_main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="메뉴 더보기"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_main"
+        app:layout_constraintEnd_toStartOf="@+id/fab_main"
+        app:layout_constraintTop_toTopOf="@+id/fab_main" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
@@ -66,6 +76,28 @@
         app:fabSize="auto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/fab_sub2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="채팅방 입장"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_sub2"
+        app:layout_constraintEnd_toStartOf="@+id/fab_sub2"
+        app:layout_constraintTop_toTopOf="@+id/fab_sub2" />
+
+    <TextView
+        android:id="@+id/fab_sub1_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="오류 신고"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_sub1"
+        app:layout_constraintEnd_toStartOf="@+id/fab_sub1"
+        app:layout_constraintTop_toTopOf="@+id/fab_sub1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
