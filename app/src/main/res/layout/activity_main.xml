@@ -32,7 +32,7 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/startSearchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="서비스 조회"
@@ -80,8 +80,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="키워드로 검색"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/keywordText"
+        app:layout_constraintEnd_toStartOf="@+id/keywordText"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
@@ -96,7 +96,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/keywordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"

@@ -3,6 +3,7 @@ package com.example.covid_19_support
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
@@ -18,7 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSpinner()
-        startJob()
+
+        startSearchBtn.setOnClickListener {
+            startSearch()
+        }
     }
 
     private fun initSpinner() {
@@ -32,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         val detailSearchOptionAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayListOf<String>())
+
+        /**
+         * 첫번째 검색 옵션 Spinner의 값에 따라 조정
+         */
 
         locationOptionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -69,9 +77,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 검색 시작 버튼 누르면 resultActivity로 옵션 값들 전달
+     */
 
-    private fun startJob() {
+    private fun startSearch() {
         val i = Intent(this, ResultActivity::class.java)
+
+        /**
+         * keywordText에 내용이 있을 때
+         */
+        if(keywordText.text.isNotEmpty()) {
+            val keywordString = keywordText.text.toString().replace(" ", "")
+            Log.i("keywordString", keywordString)
+            val keywordOptionList : ArrayList<String> = keywordString.split(",") as ArrayList<String>
+            i.putExtra("keywordList", keywordOptionList)
+        }
+
+        val locationOptionList = ArrayList<String>()
+        locationOptionList.add(locationOptionSpinner.selectedItem.toString())
+        locationOptionList.add(detailOptionSpinner.selectedItem.toString())
+        i.putExtra("isValid", checkBox.isChecked)
+        i.putExtra("locationList", locationOptionList)
+        startActivity(i)
     }
 
     /**
