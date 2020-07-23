@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     var initTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //메인에 테스트 코드 작성
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSpinner()
