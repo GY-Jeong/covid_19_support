@@ -56,8 +56,7 @@ class ResultActivity : AppCompatActivity() {
         resultNAME.add("국가지원3")
         var adapter:ResultAdapter = ResultAdapter(resultID,resultNAME)
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
-
+        //recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
 
     }
     fun searchFB(keyword:ArrayList<String> , location:ArrayList<String>):Int {

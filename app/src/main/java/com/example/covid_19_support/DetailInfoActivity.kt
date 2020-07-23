@@ -37,7 +37,6 @@ class DetailInfoActivity : AppCompatActivity() {
 
     private fun toggleFab() {
         if (isFabOpen) {
-            //fab_main.setImageResource(R.drawable.ic_add)
             fab_sub1.startAnimation(fab_close)
             fab_sub2.startAnimation(fab_close)
             fab_sub1_text.startAnimation(fab_close)
@@ -46,7 +45,6 @@ class DetailInfoActivity : AppCompatActivity() {
             fab_sub2.isClickable = false
             isFabOpen = false
         } else {
-            //fab_main.setImageResource(R.drawable.ic_close)
             fab_sub1.startAnimation(fab_open)
             fab_sub2.startAnimation(fab_open)
             fab_sub1_text.startAnimation(fab_open)
