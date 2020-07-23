@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 detailSearchOptionAdapter.clear()
                 when(position) {
-                    0 -> detailSearchOptionAdapter.addAll(location.option0)
+                    1 -> detailSearchOptionAdapter.add("전체")
                     1 -> detailSearchOptionAdapter.addAll(location.seoul)
                     2 -> detailSearchOptionAdapter.addAll(location.gyeonggi)
                     3 -> detailSearchOptionAdapter.addAll(location.busan)
@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                     15 -> detailSearchOptionAdapter.addAll(location.gwangwon)
                     16 -> detailSearchOptionAdapter.addAll(location.jeju)
                     17 -> detailSearchOptionAdapter.addAll(location.sejong)
+                    18 -> detailSearchOptionAdapter.addAll(location.etc)
                 }
                 detailOptionSpinner.adapter = detailSearchOptionAdapter
             }
