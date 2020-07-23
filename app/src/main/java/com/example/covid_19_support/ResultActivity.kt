@@ -16,7 +16,7 @@ class ResultActivity : AppCompatActivity() {
         val isValid = i.getBooleanExtra("isValid", true)
 
         /**
-         * keyword 검색옵셔을 선택했을 때
+         * keyword 검색옵션을 선택했을 때
          */
 
         if(i.hasExtra("keywordList")) {
@@ -31,6 +31,16 @@ class ResultActivity : AppCompatActivity() {
         for(i in locationOptionList) {
             Log.i("locationOption", i)
         }
-        Log.i("isvalid", isValid.toString())
+
+        Log.i("isValid", isValid.toString())
     }
+
+    //지역으로 검색
+    //만약에 locationOptionList[0] != 전체
+
+    //keywordSearchOption == true
+    //keywordSearchOption == flse -> 검색안해도됨
+
+    //기간 case 4갠데
+    //신경써야됨
 }
