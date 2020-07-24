@@ -1,5 +1,6 @@
 package com.example.covid_19_support
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -27,6 +28,10 @@ class DetailInfoActivity : AppCompatActivity() {
         fab_sub2.setOnClickListener {
             toggleFab()
             Toast.makeText(this, "Map Open-!", Toast.LENGTH_SHORT).show()
+            val i = Intent(this, ChattingActivity::class.java)
+            val id = "000000349400"
+            i.putExtra("serviceID", id)
+            startActivity(i)
         }
     }
 
