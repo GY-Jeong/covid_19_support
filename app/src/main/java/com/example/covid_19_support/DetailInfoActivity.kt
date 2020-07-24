@@ -16,6 +16,7 @@ class DetailInfoActivity : AppCompatActivity() {
     lateinit var fab_close : Animation
     lateinit var serviceID : String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_info)

@@ -31,6 +31,7 @@ class ResultAdapter(val resultID:ArrayList<String>, val resultNAME:ArrayList<Str
         return resultID.size
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.resultList.text = resultNAME[position] // 여기서 파베에 접근해서 제목을 가져오도록 수정해야됨
     }
