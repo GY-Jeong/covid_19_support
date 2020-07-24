@@ -2,6 +2,7 @@ package com.example.covid_19_support
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -13,6 +14,7 @@ class DetailInfoActivity : AppCompatActivity() {
     var isFabOpen = false
     lateinit var fab_open : Animation
     lateinit var fab_close : Animation
+    lateinit var serviceID : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,8 @@ class DetailInfoActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        serviceID = intent.getStringExtra("ServiceID")!!
+        Log.i("ServiceID", serviceID)
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
     }

@@ -24,12 +24,6 @@ class MainActivity : AppCompatActivity() {
         startSearchBtn.setOnClickListener {
             startSearch()
         }
-        
-        timestamp()
-    }
-
-    private fun timestamp() {
-        Log.i("millisecond",  (System.currentTimeMillis()).toString())
     }
 
     private fun initSpinner() {

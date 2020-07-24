@@ -1,7 +1,9 @@
 package com.example.covid_19_support
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
@@ -90,6 +92,7 @@ class ResultActivity : AppCompatActivity() {
                         }
                     }
                 }
+                attachAdapter()
             }
         } else {// false면 키워드 말고 option이랑 valid로 검색
             db.collection("corona").get().addOnSuccessListener { result ->
@@ -108,11 +111,9 @@ class ResultActivity : AppCompatActivity() {
                         Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
                     }
                 }
+                attachAdapter()
             }
         }
-        //Log.i("count_ID_1", resultID[0])
-        //Log.i("count_NAME_1", resultNAME[0])
-        attachAdapter()
     }
 
     private fun attachAdapter() {
@@ -127,9 +128,14 @@ class ResultActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val adapter = ResultAdapter(resultID, resultNAME)
+
+        adapter.itemClickListenner = object : ResultAdapter.OnItemClickListenner {
+            override fun OnItemClick(holder: ResultAdapter.ViewHolder, view: View, data: String, position: Int) {
+                val i = Intent(applicationContext, DetailInfoActivity::class.java)
+                i.putExtra("ServiceID", resultID[position])
+                startActivity(i)
+            }
+        }
         recyclerView.adapter = adapter
     }
-
-    //기간 case 4갠데
-    //신경써야됨
 }
