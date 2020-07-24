@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_chatting.*
 
 class ChattingActivity : AppCompatActivity() {
     val messageList = ArrayList<Message>()
@@ -38,6 +39,9 @@ class ChattingActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e("hello", "Error getting documents.", exception)
             }
+
+        var adapter = MessageAdapter(messageList)
+        messageView.adapter = adapter
     }
 
 }
