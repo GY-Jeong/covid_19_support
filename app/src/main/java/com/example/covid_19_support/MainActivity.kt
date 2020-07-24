@@ -3,6 +3,7 @@ package com.example.covid_19_support
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -23,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         startSearchBtn.setOnClickListener {
             startSearch()
         }
+        
+        timestamp()
+    }
+
+    private fun timestamp() {
+        Log.i("millisecond",  (System.currentTimeMillis()).toString())
     }
 
     private fun initSpinner() {
