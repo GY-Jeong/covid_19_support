@@ -20,7 +20,6 @@ class ChattingActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         val i = intent
         id = i.getStringExtra("serviceID")!!
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
         init()
         connectFB()
     }

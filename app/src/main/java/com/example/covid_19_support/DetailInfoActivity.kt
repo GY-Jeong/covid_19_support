@@ -44,22 +44,22 @@ class DetailInfoActivity : AppCompatActivity() {
 
     private fun dialogShow() {
         val builder = AlertDialog.Builder(this)
-        builder.setMessage("내용에 맞지 않는 정보가 포함되어있나요?.").setTitle("오류 신고")
-        builder.setPositiveButton("예") {
+        builder.setMessage("내용에 맞지 않는 정보가 포함되어있나요?").setTitle("오류 신고")
+        builder.setPositiveButton("아니요") {
+                _, _ ->
+        }
+        builder.setNegativeButton("예") {
             _, _ ->
             //오류 횟수 1 증가
-        }
-        builder.setNegativeButton("아니요") {
-                _, _ ->
+            Toast.makeText(this, "오류 신고가 접수되었습니다", Toast.LENGTH_SHORT).show()
         }
         val dlg = builder.create()
         dlg.show()
     }
 
     private fun init() {
-        //serviceID = intent.getStringExtra("ServiceID")!!
-        //Log.i("ServiceID", serviceID)
-        serviceID = "000000349400"
+        serviceID = intent.getStringExtra("ServiceID")!!
+        Log.i("ServiceID", serviceID)
         getFB()
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -106,6 +106,7 @@ class DetailInfoActivity : AppCompatActivity() {
                 infoNumView.text = infoNum
                 serviceAddrView.text = serviceAddr
             }
+
     }
 
     private fun toggleFab() {
