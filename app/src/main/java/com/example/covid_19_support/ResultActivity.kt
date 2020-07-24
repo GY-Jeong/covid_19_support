@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
 
 class ResultActivity : AppCompatActivity() {
 
@@ -54,8 +55,9 @@ class ResultActivity : AppCompatActivity() {
         resultNAME.add("국가지원3")
         var adapter:ResultAdapter = ResultAdapter(resultID,resultNAME)
         recyclerView.adapter = adapter
-        //recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
+        //recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))\
 
+        var fb = FirebaseDatabase.getInstance().getReference("corona")
     }
     fun searchFB(keyword:ArrayList<String> , location:ArrayList<String>):Int {
         // TODO: 2020-07-23 파베에서 읽는 코드를 넣어야함 인자랑 내용 수정 요망
