@@ -39,21 +39,23 @@ class DetailInfoActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        serviceID = intent.getStringExtra("ServiceID")!!
-        Log.i("ServiceID", serviceID)
+        //serviceID = intent.getStringExtra("ServiceID")!!
+        //Log.i("ServiceID", serviceID)
+        serviceID = "000000349400"
         getFB()
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
     }
 
     private fun getFB() {
-        var infoDesk:String
-        var supTarget:String
-        var supContents:String
-        var applyPeriod:String
-        var requireDoc:String
-        var infoNum:String
-        var serviceAddr:String
+        lateinit var infoDesk:String
+        lateinit var supTarget:String
+        lateinit var supContents:String
+        lateinit var applyPeriod:String
+        lateinit var requireDoc:String
+        lateinit var infoNum:String
+        lateinit var serviceAddr:String
+        lateinit var serviceName:String
 
         val db = FirebaseFirestore.getInstance()
         db.collection("corona").whereEqualTo("ID",serviceID).get()
@@ -67,16 +69,24 @@ class DetailInfoActivity : AppCompatActivity() {
                     requireDoc = item["구비서류"].toString()
                     infoNum = item["문의처 전화번호"].toString()
                     serviceAddr = item["서비스 상세 주소"].toString()
+                    serviceName = item["서비스명"].toString()
 
-                    Log.i("getFB", infoDesk.toString())
-                    Log.i("getFB", supTarget.toString())
-                    Log.i("getFB", supContents.toString())
-                    Log.i("getFB", applyPeriod.toString())
-                    Log.i("getFB", requireDoc.toString())
-                    Log.i("getFB", infoNum.toString())
-                    Log.i("getFB", serviceAddr.toString())
+                    Log.i("getFB", infoDesk)
+                    Log.i("getFB", supTarget)
+                    Log.i("getFB", supContents)
+                    Log.i("getFB", applyPeriod)
+                    Log.i("getFB", requireDoc)
+                    Log.i("getFB", infoNum)
+                    Log.i("getFB", serviceAddr)
                 }
-
+                serviceNameView.text = serviceName
+                infoDeskView.text = infoDesk
+                supTargetView.text = supTarget
+                supContentsView.text = supContents
+                applyPeriodView.text = applyPeriod
+                requireDocView.text = requireDoc
+                infoNumView.text = infoNum
+                serviceAddrView.text = serviceAddr
             }
     }
 

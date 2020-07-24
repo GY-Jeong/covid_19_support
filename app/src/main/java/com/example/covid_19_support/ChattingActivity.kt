@@ -54,7 +54,7 @@ class ChattingActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (message in result) {
                     Log.i("hello", "${message["제목"]} , ${message["내용"]}")
-                    var newMessage = Message(
+                    val newMessage = Message(
                         message["제목"] as String,
                         message["내용"] as String, message["시간"] as String
                     )
@@ -67,7 +67,5 @@ class ChattingActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e("hello", "Error getting documents.", exception)
             }
-
-
     }
 }
