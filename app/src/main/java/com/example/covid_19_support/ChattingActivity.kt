@@ -74,6 +74,7 @@ class ChattingActivity : AppCompatActivity() {
         messageView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         var adapter = MessageAdapter(messageList)
         messageView.adapter = adapter
+        
 
     }
 
