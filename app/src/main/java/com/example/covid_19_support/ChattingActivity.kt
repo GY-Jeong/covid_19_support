@@ -1,11 +1,9 @@
 package com.example.covid_19_support
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_chatting.*
@@ -15,7 +13,6 @@ class ChattingActivity : AppCompatActivity() {
     lateinit var db: FirebaseFirestore
     lateinit var id: String
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
@@ -27,7 +24,6 @@ class ChattingActivity : AppCompatActivity() {
         connectFB()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun init() {
         insertBtn.setOnClickListener {
             val current = System.currentTimeMillis()
@@ -48,7 +44,6 @@ class ChattingActivity : AppCompatActivity() {
         }
     }
 
-
     private fun connectFB() {
         val doc = db.collection("chatting").document(id)
         val col = doc.collection("message")
@@ -62,16 +57,13 @@ class ChattingActivity : AppCompatActivity() {
                     )
                     messageList.add(newMessage)
                 }
-                messageView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-                var adapter = MessageAdapter(messageList)
-                messageView.adapter = adapter
             }
             .addOnFailureListener { exception ->
                 Log.e("hello", "Error getting documents.", exception)
             }
 
-
-
+        messageView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        val adapter = MessageAdapter(messageList)
+        messageView.adapter = adapter
     }
-
 }
