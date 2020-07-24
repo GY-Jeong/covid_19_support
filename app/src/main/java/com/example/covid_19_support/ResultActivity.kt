@@ -14,11 +14,13 @@ class ResultActivity : AppCompatActivity() {
     var isValid: Boolean = true
     val db = FirebaseFirestore.getInstance()
 
+
     var resultID = ArrayList<String>()
     var resultNAME = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_result)
+
 
         val i = intent
         isValid = i.getBooleanExtra("isValid", true)

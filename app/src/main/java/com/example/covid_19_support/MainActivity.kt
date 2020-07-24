@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun initSpinner() {
         val location = locationArray()
 
