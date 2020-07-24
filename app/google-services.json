@@ -30,6 +30,13 @@
             {
               "client_id": "718404979807-6a8p5gpf5vqfkfklesgj4v3jhhu1q48e.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "718404979807-gvtg2c987nca63f2o0rk5nr47mnd1bis.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kangbyungmin.LastDevContest"
+              }
             }
           ]
         }

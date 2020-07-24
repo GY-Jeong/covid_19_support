@@ -7,7 +7,8 @@ import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ChattingActivity : AppCompatActivity() {
-    lateinit var db : FirebaseFirestore
+    val messageList = ArrayList<Message>()
+    lateinit var db: FirebaseFirestore
     lateinit var id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +25,14 @@ class ChattingActivity : AppCompatActivity() {
         val doc = db.collection("chatting").document(id)
         val col = doc.collection("message")
         col.get()
-            .addOnSuccessListener {result ->
-                for(message in result) {
+            .addOnSuccessListener { result ->
+                for (message in result) {
                     Log.i("hello", "${message["제목"]} , ${message["내용"]}")
+                    var newMessage = Message(
+                        message["제목"] as String,
+                        message["내용"] as String, message["시간"] as String
+                    )
+                    messageList.add(newMessage)
                 }
             }
             .addOnFailureListener { exception ->
