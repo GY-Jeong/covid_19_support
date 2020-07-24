@@ -135,7 +135,8 @@
                     android:text="문의처명"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/infoDeskView"
@@ -161,7 +162,8 @@
                     android:text="지원대상"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/supTargetView"
@@ -187,7 +189,8 @@
                     android:text="지원내용"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/supContentsView"
@@ -213,7 +216,8 @@
                     android:text="신청기한"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/applyPeriodView"
@@ -239,7 +243,8 @@
                     android:text="구비서류"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/requireDocView"
@@ -265,7 +270,8 @@
                     android:text="문의처\n전화번호"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/infoNumView"
@@ -274,6 +280,7 @@
                     android:layout_weight="8"
                     android:autoLink="phone"
                     android:textColor="@android:color/black"
+                    android:textColorLink="@android:color/holo_blue_dark"
                     android:textSize="18sp" />
             </TableRow>
 
@@ -292,7 +299,8 @@
                     android:text="서비스\n상세주소"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
 
                 <TextView
                     android:id="@+id/serviceAddrView"
@@ -301,6 +309,7 @@
                     android:layout_weight="8"
                     android:autoLink="web"
                     android:textColor="@android:color/black"
+                    android:textColorLink="@android:color/holo_blue_dark"
                     android:textSize="18sp" />
             </TableRow>
 

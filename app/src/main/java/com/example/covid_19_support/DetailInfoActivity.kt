@@ -1,12 +1,15 @@
 package com.example.covid_19_support
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.detail_info.*
@@ -28,6 +31,7 @@ class DetailInfoActivity : AppCompatActivity() {
         }
         fab_sub1.setOnClickListener {
             toggleFab()
+            dialogShow()
         }
         fab_sub2.setOnClickListener {
             toggleFab()
@@ -36,6 +40,20 @@ class DetailInfoActivity : AppCompatActivity() {
             i.putExtra("serviceID", id)
             startActivity(i)
         }
+    }
+
+    private fun dialogShow() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("내용에 맞지 않는 정보가 포함되어있나요?.").setTitle("오류 신고")
+        builder.setPositiveButton("예") {
+            _, _ ->
+            //오류 횟수 1 증가
+        }
+        builder.setNegativeButton("아니요") {
+                _, _ ->
+        }
+        val dlg = builder.create()
+        dlg.show()
     }
 
     private fun init() {
