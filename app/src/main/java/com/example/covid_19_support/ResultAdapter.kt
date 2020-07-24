@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ResultAdapter(val resultID:ArrayList<Int>, val resultNAME:ArrayList<String>) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
+class ResultAdapter(val resultID:ArrayList<String>, val resultNAME:ArrayList<String>) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
     interface OnItemClickListenner {
         fun OnItemClick(holder : ViewHolder, view:View, data:String,position:Int)
     }
