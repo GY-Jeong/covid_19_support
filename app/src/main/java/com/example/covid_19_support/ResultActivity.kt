@@ -52,12 +52,21 @@ class ResultActivity : AppCompatActivity() {
         resultID.clear()
         resultNAME.clear()
 
-        searchFB(keywordOptionList,locationOptionList)
+        if(searchFB(keywordOptionList,locationOptionList) == 0 ) {
+            Log.i("searchFB의 정상적인 실행 완료 ㅇㅇ","")
+        }
         /**
          *파베에서 검색 후, 배열에 넣어준 후,
          */
+        for(i in resultID) {
+            Log.i("어댑터 달기 전 resultID 춝력",i)
+        }
+        for(i in resultNAME) {
+            Log.i("어댑터 달기 전 resultNAME 춝력",i)
+        }
         var adapter:ResultAdapter = ResultAdapter(resultID,resultNAME)
         recyclerView.adapter = adapter
+        //adapter.notifyDataSetChanged()
         //recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))\
     }
     fun searchFB(keyword:ArrayList<String> , location:ArrayList<String>):Int {
@@ -103,7 +112,7 @@ class ResultActivity : AppCompatActivity() {
                             Log.i("db에서 읽기 --","${document.id} => ${document["ID"]} &&&& ${document["지원내용"]} &&& ${document["지원대상"]} &&& ${document["서비스명"]}")
                             for(word in keyword) {
                                 Log.i("for문 입성","입성했다")
-                                if((document["지원내용"] as String).toString().contains(word)) {
+                                if((document["지원내용"]).toString().contains(word)) {
                                     Log.i("내용과 word가 일치","일치")
                                     if(resultID.contains(document["ID"] as String)) {
                                         break
@@ -113,23 +122,39 @@ class ResultActivity : AppCompatActivity() {
                                         for(i in resultID) {
                                             Log.i("resultID 춝력",i)
                                         }
-
+                                        for(i in resultNAME) {
+                                            Log.i("resultNAME 춝력",i)
+                                        }
                                     }
                                 }
                                 if((document["지원대상"] as String).toString().contains(word)) {
+                                    Log.i("대상과 word가 일치","일치")
                                     if(resultID.contains(document["ID"] as String)) {
                                         break
                                     } else {
                                         resultID.add(document["ID"] as String)
                                         resultNAME.add(document["서비스명"] as String)
+                                        for(i in resultID) {
+                                            Log.i("resultID 춝력",i)
+                                        }
+                                        for(i in resultNAME) {
+                                            Log.i("resultNAME 춝력",i)
+                                        }
                                     }
                                 }
                                 if((document["서비스명"] as String).toString().contains(word)) {
+                                    Log.i("서비스명과 word가 일치","일치")
                                     if(resultID.contains(document["ID"] as String)) {
                                         break
                                     } else {
                                         resultID.add(document["ID"] as String)
                                         resultNAME.add(document["서비스명"] as String)
+                                        for(i in resultID) {
+                                            Log.i("resultID 춝력",i)
+                                        }
+                                        for(i in resultNAME) {
+                                            Log.i("resultNAME 춝력",i)
+                                        }
                                     }
                                 }
                             }
