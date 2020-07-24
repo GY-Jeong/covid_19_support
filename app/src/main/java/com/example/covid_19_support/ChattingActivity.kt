@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_chatting.*
 import java.lang.Long.parseLong
@@ -70,9 +71,10 @@ class ChattingActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e("hello", "Error getting documents.", exception)
             }
-
+        messageView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         var adapter = MessageAdapter(messageList)
         messageView.adapter = adapter
+
     }
 
 }

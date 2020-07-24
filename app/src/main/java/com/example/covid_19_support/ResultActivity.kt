@@ -90,6 +90,7 @@ class ResultActivity : AppCompatActivity() {
                         }
                     }
                 }
+                attachAdapter()
             }
         } else {// false면 키워드 말고 option이랑 valid로 검색
             db.collection("corona").get().addOnSuccessListener { result ->
@@ -108,11 +109,12 @@ class ResultActivity : AppCompatActivity() {
                         Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
                     }
                 }
+                attachAdapter()
             }
         }
         //Log.i("count_ID_1", resultID[0])
         //Log.i("count_NAME_1", resultNAME[0])
-        attachAdapter()
+
     }
 
     private fun attachAdapter() {
