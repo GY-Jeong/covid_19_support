@@ -54,6 +54,7 @@ class ChattingActivity : AppCompatActivity() {
         }
     }
 
+    
     private fun connectFB() {
         val doc = db.collection("chatting").document(id)
         val col = doc.collection("message")
@@ -74,7 +75,7 @@ class ChattingActivity : AppCompatActivity() {
         messageView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         var adapter = MessageAdapter(messageList)
         messageView.adapter = adapter
-        
+
 
     }
 
