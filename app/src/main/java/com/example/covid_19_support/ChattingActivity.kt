@@ -14,13 +14,13 @@ class ChattingActivity : AppCompatActivity() {
     lateinit var db: FirebaseFirestore
     lateinit var id: String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
-        db = FirebaseFirestore.getInstance()
         val i = intent
         id = i.getStringExtra("serviceID")!!
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
+        db = FirebaseFirestore.getInstance()
         init()
         connectFB()
     }

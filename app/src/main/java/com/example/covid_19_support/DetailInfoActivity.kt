@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.common.primitives.UnsignedBytes.toInt
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.detail_info.*
@@ -21,6 +22,15 @@ class DetailInfoActivity : AppCompatActivity() {
     lateinit var fab_close : Animation
     lateinit var serviceID : String
 
+    lateinit var infoDesk:String
+    lateinit var supTarget:String
+    lateinit var supContents:String
+    lateinit var applyPeriod:String
+    lateinit var requireDoc:String
+    lateinit var infoNum:String
+    lateinit var serviceAddr:String
+    lateinit var serviceName:String
+    var errorNum = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,14 +53,22 @@ class DetailInfoActivity : AppCompatActivity() {
     }
 
     private fun dialogShow() {
+        val db = FirebaseFirestore.getInstance()
+        val num = db.collection("corona").document("오류 신고 수").toString()
+
         val builder = AlertDialog.Builder(this)
         builder.setMessage("내용에 맞지 않는 정보가 포함되어있나요?.").setTitle("오류 신고")
         builder.setPositiveButton("예") {
             _, _ ->
+            val msg = hashMapOf(
+                "오류 신고 수" to (num.toInt() + 1)
+            )
+            val doc = db.collection("corona").document(serviceID).set(msg)
             //오류 횟수 1 증가
         }
-        builder.setNegativeButton("아니요") {
+        builder.setNegativeButton("아니오") {
                 _, _ ->
+
         }
         val dlg = builder.create()
         dlg.show()
@@ -66,16 +84,10 @@ class DetailInfoActivity : AppCompatActivity() {
     }
 
     private fun getFB() {
-        lateinit var infoDesk:String
-        lateinit var supTarget:String
-        lateinit var supContents:String
-        lateinit var applyPeriod:String
-        lateinit var requireDoc:String
-        lateinit var infoNum:String
-        lateinit var serviceAddr:String
-        lateinit var serviceName:String
+
 
         val db = FirebaseFirestore.getInstance()
+
         db.collection("corona").whereEqualTo("ID",serviceID).get()
             .addOnSuccessListener {
                 documents ->
@@ -88,6 +100,7 @@ class DetailInfoActivity : AppCompatActivity() {
                     infoNum = item["문의처 전화번호"].toString()
                     serviceAddr = item["서비스 상세 주소"].toString()
                     serviceName = item["서비스명"].toString()
+                    errorNum = item["오류 신고 수"].toString()
 
                     Log.i("getFB", infoDesk)
                     Log.i("getFB", supTarget)

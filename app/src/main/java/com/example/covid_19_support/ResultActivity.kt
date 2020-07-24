@@ -23,6 +23,7 @@ class ResultActivity : AppCompatActivity() {
 
 
         val i = intent
+
         isValid = i.getBooleanExtra("isValid", true)
 
         /**
