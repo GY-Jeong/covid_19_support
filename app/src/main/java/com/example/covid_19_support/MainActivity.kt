@@ -91,8 +91,14 @@ class MainActivity : AppCompatActivity() {
         if(keywordText.text.isNotEmpty()) {
             val keywordString = keywordText.text.toString().replace(" ", "")
             Log.i("keywordString", keywordString)
-            val keywordOptionList : ArrayList<String> = keywordString.split(",") as ArrayList<String>
-            i.putExtra("keywordList", keywordOptionList)
+            if(keywordString.contains(",")) {
+                val keywordOptionList = keywordString.split(",") as ArrayList<String>
+                i.putExtra("keywordList", keywordOptionList)
+            } else {
+                val keywordOptionList = arrayListOf<String>()
+                keywordOptionList.add(keywordString)
+                i.putExtra("keywordList", keywordOptionList)
+            }
         }
 
         val locationOptionList = ArrayList<String>()

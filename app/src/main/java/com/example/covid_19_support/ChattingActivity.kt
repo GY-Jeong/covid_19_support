@@ -13,4 +13,6 @@ class ChattingActivity : AppCompatActivity() {
         val id = i.getStringExtra("serviceID")
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
     }
+
+
 }

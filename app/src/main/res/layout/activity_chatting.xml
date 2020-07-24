@@ -86,7 +86,7 @@
     <EditText
         android:id="@+id/editText2"
         android:layout_width="0dp"
-        android:layout_height="81dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:ems="10"
         android:hint="내용을 입력하세요"
