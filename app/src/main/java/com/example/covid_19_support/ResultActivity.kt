@@ -30,6 +30,7 @@ class ResultActivity : AppCompatActivity() {
          * keyword 검색옵션을 선택했을 때
          */
         lateinit var keywordOptionList:ArrayList<String>
+        
         if(i.hasExtra("keywordList")) {
             keywordSearchOption = true
             keywordOptionList = i.getStringArrayListExtra("keywordList") as ArrayList<String>
