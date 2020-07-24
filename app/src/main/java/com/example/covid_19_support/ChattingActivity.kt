@@ -25,7 +25,7 @@ class ChattingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chatting)
         db = FirebaseFirestore.getInstance()
         val i = intent
-        id = i.getStringExtra("serviceID")
+        id = i.getStringExtra("serviceID")!!
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
         init()
         connectFB()
@@ -35,7 +35,7 @@ class ChattingActivity : AppCompatActivity() {
     private fun init() {
         insertBtn.setOnClickListener {
             val current = System.currentTimeMillis()
-            Log.i("time",":"+current.toString())
+            Log.i("time", ":$current")
             var msg2 = Message(editText.text.toString(),editText2.text.toString(), current.toString())
             val msg = hashMapOf(
                 "제목" to editText.text.toString(),
