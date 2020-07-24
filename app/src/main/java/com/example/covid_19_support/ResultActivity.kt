@@ -70,37 +70,38 @@ class ResultActivity : AppCompatActivity() {
             //db 연결후 검색 시작
             db.collection("corona").get().addOnSuccessListener { result ->
                 for (document in result) {
-                    if (location[0] == "전체") {
+                    if (location[0] == "전체" || (location[0] == document["지역 단위"] as String && (location[1] == "전체" || location[1] == document["소관기관 명"] as String))) {
                         for (word in keyword) {
-                            if (document["지원내용"].toString().contains(word) || document["지원대상"].toString().contains(word) || (document["서비스명"] as String).toString().contains(word)) {
+                            if (document["지원내용"].toString().contains(word) || document["지원대상"].toString().contains(word) || document["서비스명"].toString().contains(word)) {
                                 if(resultID.contains(document["ID"] as String)) {
                                     break
                                 }
-                                resultID.add(document["ID"] as String)
-                                resultNAME.add(document["서비스명"] as String)
-                                Log.i("check", "${document["ID"].toString()}, ${document["서비스명"].toString()}")
-                            }
-                        }
-                    } else if (location[0] == document["지역 단위"].toString() && location[1] == "전체") {
-                        for (word in keyword) {
-                            if (document["지원내용"].toString().contains(word) || document["지원대상"].toString().contains(word) || (document["서비스명"] as String).toString().contains(word)) {
-                                if(resultID.contains(document["ID"] as String)) {
-                                    break
+                                var add = false
+                                if(isValid) {
+                                    val v = document["신청기한"].toString().replace(" ", "")
+                                    if(v.length == 1) {
+                                        add = true
+                                    }
+                                    else if(v.length == 9) {
+                                        if(v.startsWith(",") && v.substring(1).toInt() < dateInt) {
+                                            add = true
+                                        } else if(v.substring(0,8).toInt() < dateInt) {
+                                            add = true
+                                        }
+                                    }
+                                    else {
+                                        if(v.substring(0,8).toInt() < dateInt && v.substring(9).toInt() > dateInt) {
+                                            add = true
+                                        }
+                                    }
+                                } else {
+                                    add = true
                                 }
-                                resultID.add(document["ID"] as String)
-                                resultNAME.add(document["서비스명"] as String)
-                                Log.i("check", "${document["ID"].toString()}, ${document["서비스명"].toString()}")
-                            }
-                        }
-                    } else if (location[0] == document["지역 단위"].toString() && location[1] == document["소관기관 명"].toString()) {
-                        for (word in keyword) {
-                            if (document["지원내용"].toString().contains(word) || document["지원대상"].toString().contains(word) || (document["서비스명"] as String).toString().contains(word)) {
-                                if(resultID.contains(document["ID"] as String)) {
-                                    break
+                                if(add) {
+                                    resultID.add(document["ID"].toString())
+                                    resultNAME.add(document["서비스명"].toString())
+                                    Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
                                 }
-                                resultID.add(document["ID"] as String)
-                                resultNAME.add(document["서비스명"] as String)
-                                Log.i("check", "${document["ID"].toString()}, ${document["서비스명"].toString()}")
                             }
                         }
                     }
