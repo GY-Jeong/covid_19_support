@@ -13,7 +13,7 @@ class ResultActivity : AppCompatActivity() {
     var keywordSearchOption: Boolean = false
     var isValid: Boolean = true
     val db = FirebaseFirestore.getInstance()
-
+    var entryNum = 0
 
     var resultID = ArrayList<String>()
     var resultNAME = ArrayList<String>()
@@ -120,6 +120,8 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun attachAdapter() {
+        entryNum = resultID.size
+        resultEntryView.text = "${entryNum}개의 서비스가 검색되었습니다."
         Log.i("count_ID_2", resultID.size.toString())
         Log.i("count_NAME_2", resultNAME.size.toString())
         for (i in resultID) {

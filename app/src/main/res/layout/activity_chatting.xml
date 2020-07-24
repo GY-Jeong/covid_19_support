@@ -100,7 +100,9 @@
         android:ems="10"
         android:gravity="bottom"
         android:hint="내용을 입력하세요"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
+        android:lineSpacingExtra="8sp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView10"
@@ -121,8 +123,11 @@
 
     <ImageView
         android:id="@+id/insertBtn"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
