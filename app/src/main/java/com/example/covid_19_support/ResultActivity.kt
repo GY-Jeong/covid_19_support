@@ -190,12 +190,15 @@ class ResultActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    Log.i("방대한 db 하나 끝","done")
                 }
+                Log.i("성공시 하는 코드 모두 끝","done")
             }
-            .addOnFailureListener {
-                exception ->
-                Log.i("db에서 읽기(실패 --","Error:",exception)
-            }
+            Log.i("ALL DONE모두 끝","done")
+//            .addOnFailureListener {
+//                exception ->
+//                Log.i("db에서 읽기(실패 --","Error:",exception)
+//            }
         } else {// false면 키워드 말고 option이랑 valid로 검색
             db.collection("corona").get().addOnSuccessListener {
                     result ->

@@ -27,7 +27,7 @@ class MessageAdapter(val messageList:ArrayList<Message>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = messageList[position].time
+        holder.title.text = messageList[position].title
         holder.body.text = messageList[position].body
     }
 }
