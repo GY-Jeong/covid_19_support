@@ -16,7 +16,7 @@ class ResultActivity : AppCompatActivity() {
     var isValid: Boolean = true
     val db = FirebaseFirestore.getInstance()
     var entryNum = 0
-    var dateString = ""
+    var dateInt = 0
 
     var resultID = ArrayList<String>()
     var resultNAME = ArrayList<String>()
@@ -61,18 +61,9 @@ class ResultActivity : AppCompatActivity() {
         val year = cal.get(Calendar.YEAR)
         val month = cal.get(Calendar.MONTH) + 1
         val date = cal.get(Calendar.DATE)
-        dateString = year.toString() + String.format("%02d", month) + String.format("%02d", date)
+        dateInt = (year.toString() + String.format("%02d", month) + String.format("%02d", date)).toInt()
     }
 
-    /**
-     * case는 총 4개
-     * 1. ~ : 패스
-     * 2. 20200101 ~
-     * 3. ~ 20201231
-     * 4. 20200101 ~ 20201231
-     * 결국, 왼쪽, 오른쪽 사이에 dateString이 존재하는지 파악하는 것이 중요
-     * 왼쪽이 비어 있다면, 00000000으로 오른쪽이 비어있다면 99999999로
-     */
     fun searchFB(keyword: ArrayList<String>, location: ArrayList<String>){
         // TODO: 2020-07-23 파베에서 읽는 코드를 넣어야함 인자랑 내용 수정 요망
         if (keywordSearchOption) {
@@ -119,18 +110,33 @@ class ResultActivity : AppCompatActivity() {
         } else {// false면 키워드 말고 option이랑 valid로 검색
             db.collection("corona").get().addOnSuccessListener { result ->
                 for (document in result) {
-                    if (location[0] == "전체") {
-                        resultID.add(document["ID"].toString())
-                        resultNAME.add(document["서비스명"].toString())
-                        Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
-                    } else if (location[0] == document["지역 단위"] as String && location[1] == "전체") {
-                        resultID.add(document["ID"].toString())
-                        resultNAME.add(document["서비스명"].toString())
-                        Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
-                    } else if (location[0] == document["지역 단위"] as String && location[1] == document["소관기관 명"] as String) {
-                        resultID.add(document["ID"].toString())
-                        resultNAME.add(document["서비스명"].toString())
-                        Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
+                    if (location[0] == "전체" || (location[0] == document["지역 단위"] as String && (location[1] == "전체" || location[1] == document["소관기관 명"] as String))) {
+                        var add = false
+                        if(isValid) {
+                            val v = document["신청기한"].toString().replace(" ", "")
+                            if(v.length == 1) {
+                                add = true
+                            }
+                            else if(v.length == 9) {
+                                if(v.startsWith(",") && v.substring(1).toInt() < dateInt) {
+                                    add = true
+                                } else if(v.substring(0,8).toInt() < dateInt) {
+                                    add = true
+                                }
+                            }
+                            else {
+                                if(v.substring(0,8).toInt() < dateInt && v.substring(9).toInt() > dateInt) {
+                                    add = true
+                                }
+                            }
+                        } else {
+                            add = true
+                        }
+                        if(add) {
+                            resultID.add(document["ID"].toString())
+                            resultNAME.add(document["서비스명"].toString())
+                            Log.i("check", "${document["ID"]}, ${document["서비스명"]}, ${resultID[0]}")
+                        }
                     }
                 }
                 attachAdapter()
