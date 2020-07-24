@@ -23,11 +23,9 @@ class DetailInfoActivity : AppCompatActivity() {
         }
         fab_sub1.setOnClickListener {
             toggleFab()
-            Toast.makeText(this, "Camera Open-!", Toast.LENGTH_SHORT).show()
         }
         fab_sub2.setOnClickListener {
             toggleFab()
-            Toast.makeText(this, "Map Open-!", Toast.LENGTH_SHORT).show()
             val i = Intent(this, ChattingActivity::class.java)
             val id = "000000349400"
             i.putExtra("serviceID", id)
