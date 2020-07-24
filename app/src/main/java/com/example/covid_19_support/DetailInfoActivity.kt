@@ -1,6 +1,5 @@
 package com.example.covid_19_support
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +8,6 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.detail_info.*
 

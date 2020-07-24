@@ -8,22 +8,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.search_result.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ResultActivity : AppCompatActivity() {
     var keywordSearchOption: Boolean = false
     var isValid: Boolean = true
     val db = FirebaseFirestore.getInstance()
     var entryNum = 0
+    var dateString = ""
 
     var resultID = ArrayList<String>()
     var resultNAME = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_result)
-
+        getDate()
 
         val i = intent
-
         isValid = i.getBooleanExtra("isValid", true)
 
         /**
@@ -54,6 +56,23 @@ class ResultActivity : AppCompatActivity() {
          */
     }
 
+    private fun getDate() {
+        val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH) + 1
+        val date = cal.get(Calendar.DATE)
+        dateString = year.toString() + String.format("%02d", month) + String.format("%02d", date)
+    }
+
+    /**
+     * case는 총 4개
+     * 1. ~ : 패스
+     * 2. 20200101 ~
+     * 3. ~ 20201231
+     * 4. 20200101 ~ 20201231
+     * 결국, 왼쪽, 오른쪽 사이에 dateString이 존재하는지 파악하는 것이 중요
+     * 왼쪽이 비어 있다면, 00000000으로 오른쪽이 비어있다면 99999999로
+     */
     fun searchFB(keyword: ArrayList<String>, location: ArrayList<String>){
         // TODO: 2020-07-23 파베에서 읽는 코드를 넣어야함 인자랑 내용 수정 요망
         if (keywordSearchOption) {
@@ -124,13 +143,6 @@ class ResultActivity : AppCompatActivity() {
         resultEntryView.text = "${entryNum}개의 서비스가 검색되었습니다."
         Log.i("count_ID_2", resultID.size.toString())
         Log.i("count_NAME_2", resultNAME.size.toString())
-        for (i in resultID) {
-            Log.i("어댑터 달기 전 resultID 춝력", i)
-        }
-        for (i in resultNAME) {
-            Log.i("어댑터 달기 전 resultNAME 춝력", i)
-        }
-
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val adapter = ResultAdapter(resultID, resultNAME)
 
