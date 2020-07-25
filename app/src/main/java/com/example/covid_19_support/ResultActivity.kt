@@ -83,10 +83,14 @@ class ResultActivity : AppCompatActivity() {
                                         add = true
                                     }
                                     else if(v.length == 9) {
-                                        if(v.startsWith("~") && v.substring(1).toInt() <= dateInt) {
-                                            add = true
-                                        } else if(v.substring(0,8).toInt() < dateInt) {
-                                            add = true
+                                        if(v.startsWith("~")) {
+                                            if(v.substring(1).toInt() <= dateInt) {
+                                                add = true
+                                            }
+                                        } else if(v.endsWith("~")) {
+                                            if(v.substring(0,8).toInt() <= dateInt) {
+                                                add = true
+                                            }
                                         }
                                     }
                                     else {
@@ -119,10 +123,14 @@ class ResultActivity : AppCompatActivity() {
                                 add = true
                             }
                             else if(v.length == 9) {
-                                if(v.startsWith("~") && v.substring(1).toInt() <= dateInt) {
-                                    add = true
-                                } else if(v.substring(0,8).toInt() < dateInt) {
-                                    add = true
+                                if(v.startsWith("~")) {
+                                    if(v.substring(1).toInt() <= dateInt) {
+                                        add = true
+                                    }
+                                } else if(v.endsWith("~")) {
+                                    if(v.substring(0,8).toInt() <= dateInt) {
+                                        add = true
+                                    }
                                 }
                             }
                             else {
