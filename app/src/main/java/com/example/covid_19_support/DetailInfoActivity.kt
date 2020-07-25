@@ -8,7 +8,9 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.detail_info.*
 
 
@@ -17,7 +19,9 @@ class DetailInfoActivity : AppCompatActivity() {
     lateinit var fab_open : Animation
     lateinit var fab_close : Animation
     lateinit var serviceID : String
-
+    lateinit var db : FirebaseFirestore
+    var errorCount : Long = 0
+    lateinit var query : Task<QuerySnapshot>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +45,18 @@ class DetailInfoActivity : AppCompatActivity() {
 
     private fun dialogShow() {
         val builder = AlertDialog.Builder(this)
-        builder.setMessage("내용에 맞지 않는 정보가 포함되어있나요?").setTitle("오류 신고")
+        builder.setMessage("내용에 맞지 않는 정보가 포함되어있나요?\n현재 오류 신고 횟수는 ${errorCount}회 입니다.").setTitle("오류 신고")
         builder.setPositiveButton("아니요") {
                 _, _ ->
         }
         builder.setNegativeButton("예") {
             _, _ ->
             //오류 횟수 1 증가
+            errorCount++
+            val docRef = db.collection("corona").document(serviceID)
+            docRef.update("오류 신고 수", errorCount)
             Toast.makeText(this, "오류 신고가 접수되었습니다", Toast.LENGTH_SHORT).show()
+            attachErrorCountView()
         }
         val dlg = builder.create()
         dlg.show()
@@ -72,8 +80,9 @@ class DetailInfoActivity : AppCompatActivity() {
         lateinit var serviceAddr:String
         lateinit var serviceName:String
 
-        val db = FirebaseFirestore.getInstance()
-        db.collection("corona").whereEqualTo("ID",serviceID).get()
+        db = FirebaseFirestore.getInstance()
+        query = db.collection("corona").whereEqualTo("ID",serviceID).get()
+        query
             .addOnSuccessListener {
                 documents ->
                 for( item in documents) {
@@ -85,6 +94,7 @@ class DetailInfoActivity : AppCompatActivity() {
                     infoNum = item["문의처 전화번호"].toString()
                     serviceAddr = item["서비스 상세 주소"].toString()
                     serviceName = item["서비스명"].toString()
+                    errorCount = item["오류 신고 수"] as Long
 
                     Log.i("getFB", infoDesk)
                     Log.i("getFB", supTarget)
@@ -102,9 +112,19 @@ class DetailInfoActivity : AppCompatActivity() {
                 requireDocView.text = requireDoc
                 infoNumView.text = infoNum
                 serviceAddrView.text = serviceAddr
-            }
 
+                attachErrorCountView()
+            }
     }
+
+    private fun attachErrorCountView() {
+        if(errorCount >= 5) {
+            errorCountView.text = "이 서비스의 정보 오류 접수는 ${errorCount}건입니다.\n정보 확인에 유의하세요!"
+        } else {
+            errorCountView.text = "이 서비스의 정보 오류 접수는 ${errorCount}건입니다."
+        }
+    }
+
 
     private fun toggleFab() {
         if (isFabOpen) {
