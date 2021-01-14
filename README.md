@@ -86,7 +86,7 @@
 
 IOS : https://github.com/mike123789-dev/covid_19_support_iOS
 
-ANDROID : https://github.com/GeunYoungJeong/covid_19_support
+ANDROID : https://github.com/GY_Jeong/covid_19_support
 
 ## 적용 공공 데이터(이이디어 실현에 필요한 공공데이터)
 
